@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BookStore</title>
+    <!-- Implements bootstrap-->
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="bg-dark text-white p-2">
+        <span class="navbar-brand ml-2">MELISSA'S ONLINE BOOKSTORE</span>
+    </div>
+    <div class="row m-1 p-1">
+        <div id="categories" class="col-3">
+            Browse through some of the most top-rated books.
+        </div>
+        <div class="col-9">
+            @RenderBody()
+        </div>
+    </div>
+    <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark" page-class-selected="btn-info" class="btn-group pull-right m-1"></div>
+</body>
+</html>
