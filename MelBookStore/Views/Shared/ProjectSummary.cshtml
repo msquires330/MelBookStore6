@@ -1,0 +1,35 @@
+﻿<!-- This is a partial view that is loaded in the main index.cshtml page -->
+
+@model Project
+
+<!-- New bootstrap: bg-info (change the background color of the card)-->
+<div class="card text-white bg-info mb-3" style="width: 18rem;">
+    <!--
+        Insert an image of the book here later
+     <img class="card-img-top" src="..." alt="Card image cap">
+    -->
+    <div class="card-body">
+        <h5 class="card-title">Title: @Model.Title</h5>
+        <p class="card-text">ISBN: @Model.ISBN</p>
+    </div>
+
+    <!-- New bootstrap: class="list-group" (puts the following items in a list format)-->
+    <ul class="list-group list-group-flush text-black-50">
+        <!-- New bootstrap: class="list-group-item" (assigns that as an item to the list)-->
+        <li class="list-group-item">Author: @Model.AuthorFirst @Model.AuthorMiddle @Model.AuthorLast</li>
+        <li class="list-group-item">Publisher: @Model.Publisher</li>
+        <li class="list-group-item">Classification: @Model.Classification</li>
+        <li class="list-group-item">Category: @Model.Category</li>
+        <li class="list-group-item">Number of Pages: @Model.NumOfPages</li>
+        <li class="list-group-item">Price: $@Model.Price</li>
+    </ul>
+    <!--
+        Insert links to buy the book here.
+
+    <div class="card-body">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+    </div>
+    -->
+</div>
+<br />

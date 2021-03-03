@@ -2,7 +2,7 @@
 
 namespace MelBookStore.Migrations
 {
-    public partial class Initial : Migration
+    public partial class _3NewBooks : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,15 @@ namespace MelBookStore.Migrations
                     BookID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AuthorFirst = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AuthorMiddle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorLast = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Publisher = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ISBN = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Classification = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false)
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    NumOfPages = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

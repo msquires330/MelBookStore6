@@ -4,45 +4,10 @@
 
 @model ProjectListViewModel
 
-<header>
-    <h1>Top Rated Books</h1>
-    <br />
-</header>
-
-<!-- goes through each item in the data base and displays the results-->
+<!-- goes through each partial view and displays the results-->
 
 @foreach (var x in Model.Projects)
 {
-    <!-- New bootstrap: bg-info (change the background color of the card)-->
-<div class="card text-white bg-info mb-3" style="width: 18rem;">
-    <!--
-        Insert an image of the book here later
-     <img class="card-img-top" src="..." alt="Card image cap">
-    -->
-    <div class="card-body">
-        <h5 class="card-title">Title: @x.Title</h5>
-        <p class="card-text">ISBN: @x.ISBN</p>
-    </div>
-
-    <!-- New bootstrap: class="list-group" (puts the following items in a list format)-->
-    <ul class="list-group list-group-flush text-black-50">
-        <!-- New bootstrap: class="list-group-item" (assigns that as an item to the list)-->
-        <li class="list-group-item">Author: @x.AuthorFirst @x.AuthorMiddle @x.AuthorLast</li>
-        <li class="list-group-item">Publisher: @x.Publisher</li>
-        <li class="list-group-item">Classification: @x.Classification</li>
-        <li class="list-group-item">Category: @x.Category</li>
-        <li class="list-group-item">Number of Pages: @x.NumOfPages</li>
-        <li class="list-group-item">Price: $@x.Price</li>
-    </ul>
-    <!--
-        Insert links to buy the book here.
-
-    <div class="card-body">
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-    </div>
-    -->
-</div>
-<br />
+    <partial name="ProjectSummary" model="x" />
 }
 

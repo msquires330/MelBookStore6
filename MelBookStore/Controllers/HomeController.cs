@@ -18,16 +18,20 @@ namespace WaterProject.Controllers
         // Declare variable for how many items to display per page
         public int PageSize = 5;
 
+        // the dataset is passed in at run time when the home controller (constructor) is called for the first time. It gets the gets the repository passed in with the dataset. 
         public HomeController(ILogger<HomeController> logger, iStoreRepository repository)
         {
             _logger = logger;
             _repository = repository;
         }
 
-        public IActionResult Index(int page = 1)
+        // default page is set to 1 & the option to view the category
+        public IActionResult Index(string category, int page = 1)
         {
+            // We set the projects variable equal to the _repository which has been created by the iStoreRepository, which has been built form the efStoreRepository, which has been built from the StoreDbContext. 
             return View(new ProjectListViewModel
             {
+                // Go to the repository to the projects table then do this stuff. 
                 Projects = _repository.Projects
                     // Order by the BookId
                     .OrderBy(p => p.BookID)
@@ -35,14 +39,19 @@ namespace WaterProject.Controllers
                     .Skip((page - 1) * PageSize)
                     // Display 
                     .Take(PageSize)
-                    , 
+                    // Where the thing you want to filter by is = to the thing that has been selected 
+                    .Where(p => category == null || p.Category == category),
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = page, 
-                    ItemsPerPage = PageSize, 
-                    TotalNumItems = _repository.Projects.Count()
-                }
-            });
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalNumItems = category == null ? _repository.Projects.Count() :
+                        _repository.Projects.Where(x => x.Category == category).Count()
+                },
+
+                // The current category in our object is = whatever category has been selected
+                Category = category
+            }); ;
 
         }
 

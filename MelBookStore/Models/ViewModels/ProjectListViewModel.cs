@@ -10,6 +10,8 @@ namespace MelBookStore.Models.ViewModels
         // The ProjectListViewModel is going to contain information about the project itself and also about the paging info 
         public IEnumerable<Project> Projects { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        // View category 
+        public string Category { get; set; }
 
     }
 }

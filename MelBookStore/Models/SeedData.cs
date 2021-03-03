@@ -152,6 +152,46 @@ namespace MelBookStore.Models
                         Category = "Thrillers",
                         Price = 15.03,
                         NumOfPages = 642
+                    },
+
+                    new Project
+                    {
+                        Title = "The Good Neighbor",
+                        AuthorFirst = "Maxwell",
+                        AuthorLast = "King",
+                        Publisher = "ABRAMS",
+                        ISBN = "978-1419735165",
+                        Classification = "Non-Fiction",
+                        Category = "Biography",
+                        Price = 15.99,
+                        NumOfPages = 320
+                    },
+
+                    new Project
+                    {
+                        Title = "Harry Potter and the Sorcerer's Stone",
+                        AuthorFirst = "J.K.",
+                        AuthorLast = "Rowling",
+                        Publisher = "Scholastic, Inc.",
+                        ISBN = "978-1338596700",
+                        Classification = "Fiction",
+                        Category = "Fantasy",
+                        Price = 29.99,
+                        NumOfPages = 368
+                    },
+
+                    new Project
+                    {
+                        Title = "The Infinite Atonement",
+                        AuthorFirst = "Tad",
+                        AuthorMiddle = "R.",
+                        AuthorLast = "Callister",
+                        Publisher = "Deseret Book Company",
+                        ISBN = "978-1629726878",
+                        Classification = "Non-Fiction",
+                        Category = "Religious",
+                        Price = 10.00,
+                        NumOfPages = 720
                     }
                 );
 

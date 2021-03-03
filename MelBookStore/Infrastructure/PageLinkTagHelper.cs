@@ -33,8 +33,14 @@ namespace MelBookStore.Infrastructure
         public PagingInfo PageModel { get; set; }
         public string PageAction { get; set; }
 
+        // any time someone enters "page - url -", add it to the dictionary 
+        // asp.net groups things together with a common prefix 
+        [HtmlAttributeName(DictionaryAttributePrefix ="page-url-")]
+        // pairs values together 
+        public Dictionary<string, object> PageUrlValues { get; set; } = new Dictionary<string, object>();
+
         // as a default set it to false
-        public bool PageClassesEnabled { get; set; } = false; 
+        public bool PageClassesEnabled { get; set; }
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
@@ -48,7 +54,8 @@ namespace MelBookStore.Infrastructure
             {
                 // Build an instance of the TagBuilder object 
                 TagBuilder tag = new TagBuilder("a");
-                tag.Attributes["href"] = urlHelper.Action(PageAction, new { page = i });
+                PageUrlValues["page"] = i;
+                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
                 // if i is equal to the Page Model of the current page, then set i to PageClassSelected. Otherwise, DO PageClassNormal. This is to make the current page turn blue. 
                 if (PageClassesEnabled)

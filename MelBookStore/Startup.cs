@@ -57,11 +57,29 @@ namespace MelBookStore
 
             app.UseAuthorization();
 
+            // This is where you edit URLs
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    "pagination",
-                    "P{page}",
+                // Start with the most specific and go down to the most vague because it will just take the first one that applies and run with it. 
+
+                // if they type in a category AND a page
+                endpoints.MapControllerRoute("catpage",
+                    "{category}/{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                // if they give us only a page 
+                endpoints.MapControllerRoute("page",
+                    "Books/{page:int}",
+                    new { Controller = "Home", action = "Index" });
+
+                // if they give us only the category 
+                endpoints.MapControllerRoute("category",
+                    "{category}",
+                    new { Controller = "Home", action = "Index", page = 1 });
+
+                // 
+                endpoints.MapControllerRoute("pagination",
+                    "Books/{page}",
                     new { Controller = "Home", action = "Index" });
                 endpoints.MapDefaultControllerRoute();
             });

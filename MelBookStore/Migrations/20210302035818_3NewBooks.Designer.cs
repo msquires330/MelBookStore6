@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MelBookStore.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20210226030506_Initial2")]
-    partial class Initial2
+    [Migration("20210302035818_3NewBooks")]
+    partial class _3NewBooks
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
