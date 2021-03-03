@@ -33,14 +33,15 @@ namespace WaterProject.Controllers
             {
                 // Go to the repository to the projects table then do this stuff. 
                 Projects = _repository.Projects
+                    // Where the thing you want to filter by is = to the thing that has been selected 
+                    .Where(p => category == null || p.Category == category)
                     // Order by the BookId
                     .OrderBy(p => p.BookID)
                     // Skip the page - 1 multiplied by the items per page
                     .Skip((page - 1) * PageSize)
                     // Display 
-                    .Take(PageSize)
-                    // Where the thing you want to filter by is = to the thing that has been selected 
-                    .Where(p => category == null || p.Category == category),
+                    .Take(PageSize),
+
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,

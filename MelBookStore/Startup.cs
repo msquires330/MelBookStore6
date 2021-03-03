@@ -64,7 +64,7 @@ namespace MelBookStore
 
                 // if they type in a category AND a page
                 endpoints.MapControllerRoute("catpage",
-                    "{category}/{page:int}",
+                    "Books/{category}/{page:int}",
                     new { Controller = "Home", action = "Index" });
 
                 // if they give us only a page 
@@ -74,7 +74,7 @@ namespace MelBookStore
 
                 // if they give us only the category 
                 endpoints.MapControllerRoute("category",
-                    "{category}",
+                    "Books/{category}",
                     new { Controller = "Home", action = "Index", page = 1 });
 
                 // 
