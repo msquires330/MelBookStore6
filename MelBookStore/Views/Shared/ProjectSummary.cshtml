@@ -23,6 +23,16 @@
         <li class="list-group-item">Number of Pages: @Model.NumOfPages</li>
         <li class="list-group-item">Price: $@Model.Price</li>
     </ul>
+
+    <form id="@Model.BookID" asp-page="/Purchase" method="post">
+        <input type="hidden" asp-for="BookID"/>
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <span class="card-text p-1">
+            <button type="submit" class="btn-success btn-sm pull-right" style="float:right">
+                Purchase
+            </button>
+        </span>
+    </form>
     <!--
         Insert links to buy the book here.
 

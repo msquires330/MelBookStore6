@@ -1,0 +1,54 @@
+﻿@page
+@model MelBookStore.Pages.PurchaseModel
+@{
+}
+
+<h2>Your Cart</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="text-center">Book</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+        <tr>
+            <!--the row is going to be equal to a few different items. line or Lines is coming from Cart.cs -->
+            <!--Book-->
+            <td class="text-left">@line.Project.Title</td>
+            <!--Quantity-->
+            <td class="text-center">@line.Quantity</td>
+            <!--Price-->
+            <td class="text-right">@((line.Project.Price).ToString("c"))</td>
+            <!--Subtotal-->
+            <td class="text-right">@((line.Quantity * line.Project.Price).ToString("c"))</td>
+            <td class="text-center">
+                <form asp-page-handler="Remove" method="post">
+                    <input type="hidden" name="BookID"
+                           value="@line.Project.BookID" />
+                    <input type="hidden" name="returnUrl"
+                           value="@Model.ReturnUrl" />
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Remove
+                    </button>
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <!--Total-->
+            <td colspan="3" class="text-right">Total: </td>
+            <td class="text-right">@Model.Cart.ComputeTotalSum().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+<br />
+<div class="text-center">
+    <a class="btn btn-info" href="@Model.ReturnUrl">Continue Shopping</a>
+</div>

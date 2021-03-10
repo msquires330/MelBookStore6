@@ -54,7 +54,7 @@ namespace MelBookStore.Infrastructure
             {
                 // Build an instance of the TagBuilder object 
                 TagBuilder tag = new TagBuilder("a");
-                PageUrlValues["page"] = i;
+                PageUrlValues["pageNum"] = i;
                 tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
 
                 // if i is equal to the Page Model of the current page, then set i to PageClassSelected. Otherwise, DO PageClassNormal. This is to make the current page turn blue. 

@@ -26,7 +26,7 @@ namespace WaterProject.Controllers
         }
 
         // default page is set to 1 & the option to view the category
-        public IActionResult Index(string category, int page = 1)
+        public IActionResult Index(string category, int pageNum = 1)
         {
             // We set the projects variable equal to the _repository which has been created by the iStoreRepository, which has been built form the efStoreRepository, which has been built from the StoreDbContext. 
             return View(new ProjectListViewModel
@@ -38,13 +38,13 @@ namespace WaterProject.Controllers
                     // Order by the BookId
                     .OrderBy(p => p.BookID)
                     // Skip the page - 1 multiplied by the items per page
-                    .Skip((page - 1) * PageSize)
+                    .Skip((pageNum - 1) * PageSize)
                     // Display 
                     .Take(PageSize),
 
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = page,
+                    CurrentPage = pageNum,
                     ItemsPerPage = PageSize,
                     TotalNumItems = category == null ? _repository.Projects.Count() :
                         _repository.Projects.Where(x => x.Category == category).Count()

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MelBookStore.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace MelBookStore
 {
@@ -31,10 +32,18 @@ namespace MelBookStore
             // Add a DbContext to the system and use SqlServer. Pass in the connection string for accessing the database. 
             services.AddDbContext<StoreDbContext>(options =>
             {
-                options.UseSqlServer(Configuration["ConnectionStrings:StoreConnection"]);
+                options.UseSqlite(Configuration["ConnectionStrings:StoreConnection"]);
             });
 
             services.AddScoped<iStoreRepository, EFStoreRepository>();
+
+            services.AddRazorPages();
+
+            // You add both these services to make the cart functionality work (get the information to stick)
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+            services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +61,8 @@ namespace MelBookStore
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            // This will set up a session for us on startup 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -64,12 +74,12 @@ namespace MelBookStore
 
                 // if they type in a category AND a page
                 endpoints.MapControllerRoute("catpage",
-                    "Books/{category}/{page:int}",
+                    "Books/{category}/{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 // if they give us only a page 
                 endpoints.MapControllerRoute("page",
-                    "Books/{page:int}",
+                    "Books/{pageNum:int}",
                     new { Controller = "Home", action = "Index" });
 
                 // if they give us only the category 
@@ -79,9 +89,10 @@ namespace MelBookStore
 
                 // 
                 endpoints.MapControllerRoute("pagination",
-                    "Books/{page}",
+                    "Books/{pageNum}",
                     new { Controller = "Home", action = "Index" });
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
             });
 
             SeedData.EnsurePopulated(app);

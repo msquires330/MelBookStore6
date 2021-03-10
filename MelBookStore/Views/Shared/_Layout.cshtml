@@ -6,8 +6,17 @@
     <!-- Implements bootstrap-->
     <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="bg-dark text-white p-2">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col navbar-brand">SPORTS STORE</div>
+                <div class="col-6 text-right"><vc:cart-summary /></div>
+            </div>
+        </div>
+    </div>
     <div class="bg-dark text-white p-2">
         <span class="navbar-brand ml-2">MELISSA'S ONLINE BOOKSTORE</span>
     </div>
@@ -23,6 +32,6 @@
     </div>
     <!--tag helpers to view navigation menu on the bottom-->
     <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true" page-class="btn" page-class-normal="btn-outline-dark" page-class-selected="btn-info" page-url-category="@Model.Category"
-         class="btn-group pull-right m-1"></div>
+            class="btn-group pull-right m-1"></div>
 </body>
 </html>
