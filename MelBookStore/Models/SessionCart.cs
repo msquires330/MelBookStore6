@@ -15,7 +15,7 @@ namespace MelBookStore.Models
             {
                 ISession session = services.GetRequiredService<IHttpContextAccessor>()?
                 .HttpContext.Session;
-                SessionCart cart = session?.GetJson<SessionCart>("Cart")
+                SessionCart cart = session?.GetJson<SessionCart>("cart")
                 ?? new SessionCart();
                 cart.Session = session;
                 return cart;
@@ -25,18 +25,18 @@ namespace MelBookStore.Models
             public override void AddItem(Project project, int quantity)
             {
                 base.AddItem(project, quantity);
-                Session.SetJson("Cart", this);
+                Session.SetJson("cart", this);
             }
 
             public override void RemoveLine(Project project)
             {
                 base.RemoveLine(project);
-                Session.SetJson("Cart", this);
+                Session.SetJson("cart", this);
             }
             public override void Clear()
             {
                 base.Clear();
-                Session.Remove("Cart");
+                Session.Remove("cart");
             }
         }
     }

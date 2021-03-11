@@ -10,10 +10,10 @@ namespace MelBookStore.Models
         public List<CartLine> Lines { get; set; } = new List<CartLine>();
 
         // When you go to add an item, pass in the project object and the quantity 
-        public virtual void AddItem(Project proj, int qty)
+        public virtual void AddItem(Project project, int quantity)
         {
             CartLine line = Lines
-                .Where(p => p.Project.BookID == proj.BookID)
+                .Where(p => p.Project.BookID == project.BookID)
                 .FirstOrDefault();
 
             // if there wasn't anything, then add a new line that has the project and the qty
@@ -21,22 +21,22 @@ namespace MelBookStore.Models
             {
                 Lines.Add(new CartLine
                 {
-                    Project = proj,
-                    Quantity = qty
+                    Project = project,
+                    Quantity = quantity
                 });
             }
 
             // otherwise just update the quantity 
             else
             {
-                line.Quantity += qty;
+                line.Quantity += quantity;
             }
 
         }
 
         // 
-        public virtual void RemoveLine(Project proj) =>
-            Lines.RemoveAll(x => x.Project.BookID == proj.BookID);
+        public virtual void RemoveLine(Project project) =>
+            Lines.RemoveAll(x => x.Project.BookID == project.BookID);
 
         //
         public virtual void Clear() => Lines.Clear();
